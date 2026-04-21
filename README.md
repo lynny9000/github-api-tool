@@ -39,15 +39,15 @@ Example:
 Limit: 5000
 Remaining: 4980
 
-========================================
-Checking: python/cpython
-Category: Python
-Status Code: 200
+========================================  
+Checking: python/cpython  
+Category: Python  
+Status Code: 200  
 
-========================================
---- Summary ---
-Successful: 9
-Failed: 1
+========================================  
+--- Summary ---  
+Successful: 9  
+Failed: 1  
 
 ## Notes
 
