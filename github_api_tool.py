@@ -1,12 +1,18 @@
 import requests
 import json
+import os
 
 print("\n=== GitHub API Investigation Tool ===")
 
 # ===============================
 # Authentication (API token)
 # ===============================
-TOKEN = "YOUR_TOKEN_HERE"
+TOKEN = os.getenv("GITHUB_TOKEN")
+
+# Check if token exists
+if not TOKEN:
+    print("Error: GITHUB_TOKEN not set")
+    exit()
 
 headers = {
     "Authorization": f"token {TOKEN}"
@@ -59,7 +65,7 @@ results = []
 category_summary = {}
 
 # ===============================
-# Main loop - check each repository
+# Loop each repository
 # ===============================
 for repo_info in repos:
 
@@ -89,7 +95,6 @@ for repo_info in repos:
 
         data = response.json()
 
-        # Extract basic repository information
         name = data.get("name")
         owner = data.get("owner", {}).get("login")
         stars = data.get("stargazers_count")
@@ -128,7 +133,6 @@ for repo_info in repos:
         else:
             latest_commit = "Error"
 
-        # Store successful result
         results.append({
             "repo": repo,
             "category": category,
@@ -148,7 +152,6 @@ for repo_info in repos:
         print("Error occurred")
         print("Response:", response.text)
 
-        # Error handling
         if response.status_code == 400:
             reason = "Bad request"
 
@@ -172,13 +175,28 @@ for repo_info in repos:
 
         print("Reason:", reason)
 
-        # Store failure result
         results.append({
             "repo": repo,
             "category": category,
             "status": "failed",
             "reason": reason
         })
+
+# ===============================
+# Analysis
+# ===============================
+top_repo = None
+max_stars = -1
+
+for r in results:
+    if r["status"] == "success":
+        if r["stars"] > max_stars:
+            max_stars = r["stars"]
+            top_repo = r["repo"]
+
+print("\n--- Analysis ---")
+print("Top repo by stars:", top_repo)
+print("Stars:", max_stars)
 
 # ===============================
 # Overall summary
@@ -222,7 +240,6 @@ for r in results:
         print("Reason:", r["reason"])
         print()
 
-# Only save failure file if exists
 if failures:
     with open("github_failures.json", "w") as file:
         json.dump(failures, file, indent=2)

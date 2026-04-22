@@ -1,0 +1,80 @@
+[
+  {
+    "repo": "python/cpython",
+    "category": "Python",
+    "status": "success",
+    "stars": 72411,
+    "issues": 30,
+    "latest_commit": "gh-148207: add additional keywords to `typing.TypeVarTuple` (#148212)"
+  },
+  {
+    "repo": "pallets/flask",
+    "category": "Python",
+    "status": "success",
+    "stars": 71438,
+    "issues": 3,
+    "latest_commit": "Merge branch 'stable'"
+  },
+  {
+    "repo": "aws/aws-cli",
+    "category": "AWS",
+    "status": "success",
+    "stars": 16893,
+    "issues": 30,
+    "latest_commit": "Merge branch 'release-1.44.83' into develop\n\n* release-1.44.83:\n  Bumping version to 1.44.83\n  Update changelog based on model updates"
+  },
+  {
+    "repo": "hashicorp/terraform",
+    "category": "Infrastructure",
+    "status": "success",
+    "stars": 48206,
+    "issues": 30,
+    "latest_commit": "Make `validation -json` command produce JSON output when argument parsing raises an error\n\n* refactor: Put existing test into subtest\n* fix: Make `validation -json` command produce JSON output when argument parsing raises an error"
+  },
+  {
+    "repo": "Azure/azure-sdk-for-python",
+    "category": "Azure",
+    "status": "success",
+    "stars": 5526,
+    "issues": 30,
+    "latest_commit": "[WebPubSub] Fix TSP migration deviations for Python SDK (#46175)\n\n* regenerate from the repaired TSP\n\n* enhance tests\n\n* skip live websocket coverage test\n\n* update test recording\n\n* update typespec reference\n\n* update for comments\n\n* remove the generated tests and samples"
+  },
+  {
+    "repo": "wireshark/wireshark",
+    "category": "Networking",
+    "status": "success",
+    "stars": 9241,
+    "issues": 0,
+    "latest_commit": "HTTP: Add expert warning for malformed status code tokens\n\nSigned-off-by: Urval <kheniurval777@gmail.com>"
+  },
+  {
+    "repo": "postgres/postgres",
+    "category": "SQL",
+    "status": "success",
+    "stars": 20669,
+    "issues": 0,
+    "latest_commit": "Preserve extension dependencies on indexes during partition merge/split\n\nWhen using ALTER TABLE ... MERGE PARTITIONS or ALTER TABLE ... SPLIT\nPARTITION, extension dependencies on partition indexes were being lost.\nThis happened because the new partition indexes are created fresh from\nthe parent partitioned table's indexes, while the old partition indexes\n(with their extension dependencies) are dropped.\n\nFix this by collecting extension dependencies from source partition\nindexes before detaching them, then applying those dependencies to the\ncorresponding new partition indexes after they're created.  The mapping\nbetween old and new indexes is done via their common parent partitioned\nindex.\n\nFor MERGE operations, all source partition indexes sharing a parent\npartitioned index must have the same extension dependencies; if they\ndiffer, an error naming both conflicting partition indexes is raised.\nThe check is implemented by collecting one entry per partition index,\nsorting by parent index OID, and comparing adjacent entries in a single\npass.  This is order-independent: the same set of partitions produces\nthe same decision regardless of the order they are listed in the MERGE\ncommand, and subset mismatches are caught in both directions.\n\nFor SPLIT operations, the new partition indexes simply inherit all\nextension dependencies from the source partition's index.\n\nThe regression tests exercising this feature live under\nsrc/test/modules/test_extensions, where the test_ext3 and test_ext5\nextensions are available; core regression tests cannot assume any\nparticular extension is installed.\n\nAuthor: Matheus Alcantara <matheusssilv97@gmail.com>\nCo-authored-by: Alexander Korotkov <aekorotkov@gmail.com>\nReported-by: Kirill Reshke <reshkekirill@gmail.com>\nReviewed-by: Dmitry Koval <d.koval@postgrespro.ru>\nDiscussion: https://www.postgresql.org/message-id/CALdSSPjXtzGM7Uk4fWRwRMXcCczge5uNirPQcYCHKPAWPkp9iQ%40mail.gmail.com"
+  },
+  {
+    "repo": "microsoft/vscode",
+    "category": "Development Tools",
+    "status": "success",
+    "stars": 184140,
+    "issues": 30,
+    "latest_commit": "Move skip shell handling to service and optimize (#311892)\n\nFixes #311878"
+  },
+  {
+    "repo": "docker/compose",
+    "category": "Containers",
+    "status": "success",
+    "stars": 37307,
+    "issues": 30,
+    "latest_commit": "build(deps): bump github.com/mattn/go-shellwords from 1.0.12 to 1.0.13\n\nBumps [github.com/mattn/go-shellwords](https://github.com/mattn/go-shellwords) from 1.0.12 to 1.0.13.\n- [Commits](https://github.com/mattn/go-shellwords/compare/v1.0.12...v1.0.13)\n\n---\nupdated-dependencies:\n- dependency-name: github.com/mattn/go-shellwords\n  dependency-version: 1.0.13\n  dependency-type: direct:production\n  update-type: version-update:semver-patch\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>"
+  },
+  {
+    "repo": "nonexistent/repo123",
+    "category": "Test Failure",
+    "status": "failed",
+    "reason": "Repository not found"
+  }
+]

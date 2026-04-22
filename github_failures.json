@@ -1,0 +1,8 @@
+[
+  {
+    "repo": "nonexistent/repo123",
+    "category": "Test Failure",
+    "status": "failed",
+    "reason": "Repository not found"
+  }
+]
