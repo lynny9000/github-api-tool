@@ -4,9 +4,7 @@ import os
 
 print("\n=== GitHub API Investigation Tool ===")
 
-# ===============================
 # Authentication (API token)
-# ===============================
 TOKEN = os.getenv("GITHUB_TOKEN")
 
 # Check if token exists
@@ -18,9 +16,7 @@ headers = {
     "Authorization": f"token {TOKEN}"
 }
 
-# ===============================
 # Check API rate limit
-# ===============================
 print("\n--- API Rate Limit ---")
 
 rate_url = "https://api.github.com/rate_limit"
@@ -38,9 +34,8 @@ else:
     print("Failed to check rate limit")
     print("Response:", rate_response.text)
 
-# ===============================
+
 # Repositories to check
-# ===============================
 repos = [
     {"name": "python/cpython", "category": "Python"},
     {"name": "pallets/flask", "category": "Python"},
@@ -64,9 +59,7 @@ results = []
 # Track results per category
 category_summary = {}
 
-# ===============================
 # Loop each repository
-# ===============================
 for repo_info in repos:
 
     repo = repo_info["name"]
@@ -85,9 +78,7 @@ for repo_info in repos:
     if category not in category_summary:
         category_summary[category] = {"success": 0, "failed": 0}
 
-    # ===============================
     # Successful response
-    # ===============================
     if response.status_code == 200:
 
         success_count += 1
@@ -103,9 +94,7 @@ for repo_info in repos:
         print("Owner:", owner)
         print("Stars:", stars)
 
-        # ===============================
         # Get issues
-        # ===============================
         issues_url = f"https://api.github.com/repos/{repo}/issues"
         issues_response = requests.get(issues_url, headers=headers)
 
@@ -117,9 +106,7 @@ for repo_info in repos:
             issue_count = "Error"
             print("Issues fetch failed")
 
-        # ===============================
         # Get latest commit
-        # ===============================
         commits_url = f"https://api.github.com/repos/{repo}/commits"
         commits_response = requests.get(commits_url, headers=headers)
 
@@ -141,10 +128,8 @@ for repo_info in repos:
             "issues": issue_count,
             "latest_commit": latest_commit
         })
-
-    # ===============================
+        
     # Failed response
-    # ===============================
     else:
         fail_count += 1
         category_summary[category]["failed"] += 1
@@ -182,9 +167,7 @@ for repo_info in repos:
             "reason": reason
         })
 
-# ===============================
 # Analysis
-# ===============================
 top_repo = None
 max_stars = -1
 
@@ -198,17 +181,13 @@ print("\n--- Analysis ---")
 print("Top repo by stars:", top_repo)
 print("Stars:", max_stars)
 
-# ===============================
 # Overall summary
-# ===============================
 print("\n" + "=" * 40)
 print("--- Summary ---")
 print("Successful:", success_count)
 print("Failed:", fail_count)
 
-# ===============================
 # Category summary
-# ===============================
 print("\n--- Category Summary ---")
 
 for category, stats in category_summary.items():
@@ -216,17 +195,13 @@ for category, stats in category_summary.items():
     print("  Successful:", stats["success"])
     print("  Failed:", stats["failed"])
 
-# ===============================
 # Save results to file
-# ===============================
 with open("github_results.json", "w") as file:
     json.dump(results, file, indent=2)
 
 print("\nResults saved to github_results.json")
 
-# ===============================
 # Failure report
-# ===============================
 print("\n--- Failure Report ---")
 
 failures = []
